@@ -1,29 +1,17 @@
+// src/App.js
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { increment, decrement } from './store'; // Import the actions
+import { useSelector } from 'react-redux';
+import Login from './components/Login';
+import Dashboard from './components/Dashboard';
 
 function App() {
-  const counter = useSelector(state => state.counter);
-  const dispatch = useDispatch();
-
-  const handleIncrement = () => {
-    for (let i = 0; i < 5; i++) {
-      dispatch(increment());
-    }
-  };
-
-  const handleDecrement = () => {
-    dispatch(decrement());
-  };
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   return (
-    <div className="App">
-      <h1>Counter: {counter}</h1>
-      <button onClick={handleIncrement}>Increment by 5</button>
-      <button onClick={handleDecrement}>Decrement by 1</button>
+    <div>
+      {isAuthenticated ? <Dashboard /> : <Login />}
     </div>
   );
 }
-
 
 export default App;
